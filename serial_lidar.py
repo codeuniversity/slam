@@ -43,7 +43,7 @@ def main():
         print(degree, distance)
 
         # after one full 360° measurement start with the x/y calculation and mapping
-        if degree == 355:
+        if degree == 358:
                 scatterPlots(results)
 
 
