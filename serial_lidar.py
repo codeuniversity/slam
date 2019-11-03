@@ -5,7 +5,7 @@ import math
 
 
 # get serial port -> Arduino -> Tools -> Port
-SERIAL_PORT = '/dev/cu.usbmodem1421'
+SERIAL_PORT = '/dev/ttyACM0'
 SERIAL_RATE = 9600
 
 def scatterPlots(results):
@@ -45,6 +45,7 @@ def main():
         # after one full 360° measurement start with the x/y calculation and mapping
         if degree == 358:
                 scatterPlots(results)
+
 
 
 if __name__ == "__main__":

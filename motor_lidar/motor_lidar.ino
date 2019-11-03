@@ -32,6 +32,7 @@ VL53L0X sensor;
 // next, declare the stepper
 // and connect pins 8,9,10,11 to IN1,IN2,IN3,IN4 on ULN2003 board
 
+
 CheapStepper stepper (8,9,10,11); 
 
 // let's create a boolean variable to save the direction of our rotation
@@ -59,7 +60,7 @@ void setup() {
   
   sensor.init();
   sensor.setTimeout(500);
-  sensor.startContinuous();
+  sensor.startContinuous();       
   
 }
 
@@ -74,6 +75,7 @@ void loop() {
     moveClockwise = false;
 
     for (int i=0; i<360; i+=5) {
+      // The Arduino sketch "pauses" during move()
       stepper.moveDegrees(moveClockwise, 5);
       Serial.print(i);
       Serial.print('-');
