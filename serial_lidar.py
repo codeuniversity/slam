@@ -8,7 +8,7 @@ import math
 SERIAL_PORT = '/dev/ttyACM0'
 SERIAL_RATE = 9600
 
-def scatterPlots(results):
+def scatterPlots(results):s
         x_values = []
         y_values = []
         for i in range(len(results)):
@@ -21,6 +21,7 @@ def scatterPlots(results):
         plt.xlabel('x')
         plt.ylabel('y')
         plt.show()
+        laserdata = [zip(x_values, y_values)]
 
 
 def main():
