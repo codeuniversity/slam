@@ -5,10 +5,10 @@ import math
 
 
 # get serial port -> Arduino -> Tools -> Port
-SERIAL_PORT = '/dev/ttyACM0'
+SERIAL_PORT = '/dev/cu.usbmodem14101'
 SERIAL_RATE = 9600
 
-def scatterPlots(results):s
+def scatterPlots(results):
         x_values = []
         y_values = []
         for i in range(len(results)):
@@ -22,7 +22,7 @@ def scatterPlots(results):s
         plt.ylabel('y')
         plt.show()
         laserdata = [zip(x_values, y_values)]
-
+        return laserdata
 
 def main():
     ser = serial.Serial(SERIAL_PORT, SERIAL_RATE)
@@ -33,12 +33,12 @@ def main():
         reading = ser.readline().decode('utf-8')
         reading = reading[:-1]
         try:
-                degree, distance = reading.split("-")
-                degree = int(degree)
-                distance = int(distance)
+            degree, distance = reading.split("-")
+            degree = int(degree)
+            distance = int(distance)
 
         except ValueError:
-                continue
+            continue
 
         results.append([degree, distance])
         print(degree, distance)
