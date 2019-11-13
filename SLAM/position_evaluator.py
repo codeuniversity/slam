@@ -1,22 +1,25 @@
-import SLAM.landmark_matcher.py
+import SLAM.landmark_matcher
+from SLAM.core import Point
 import math
 
 def evaluate_position(landmark):
     alpha_A = calculate_alpha(landmark.A.rotation)
     ZAx = math.sin(alpha_A)*landmark.A.distance
     ZAy = math.cos(alpha_A)*landmark.A.distance
-    robot_A = [landmark.A.x+ZAx,landmark.A.y+ZAy]
+    robot_A = Point(None, None, x=landmark.A.x+ZAx, y=landmark.A.y+ZAy)
 
     alpha_B = calculate_alpha(landmark.B.rotation)
     ZBx = math.sin(alpha_B)*landmark.B.distance
     ZBy = math.cos(alpha_B)*landmark.B.distance
-    robot_B = [landmark.B.x+ZBx,landmark.B.y+ZBy]
+    robot_B = Point(None, None, x=landmark.B.x+ZBx, y=landmark.B.y+ZBy)
 
     alpha_C = calculate_alpha(landmark.C.rotation)
     ZCx = math.sin(alpha_C) * landmark.C.distance
     ZCy = math.cos(alpha_C) * landmark.C.distance
-    robot_C = [landmark.B.x+ZCx,landmark.C.y+ZCy]
+    robot_C = Point(None, None, x=landmark.B.x+ZCx, y=landmark.C.y+ZCy)
 
+    robot_position = (robot_A+robot_B+robot_C)
+    return robot_position
 
 
 def calculate_alpha(stepper_angle):
