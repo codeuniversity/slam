@@ -5,10 +5,11 @@ total_landmarks = []
 
 def match_landmarks(landmarks, stored_landmarks):
     #compare vectors
+    matched_landmarks = []
     for landmark in landmarks:
         for existing_landmark in stored_landmarks:
             if landmark.AB==existing_landmark.AB and landmark.BC==landmark.BC:
-                SLAM.position_evaluator(landmark)
+                matched_landmarks.append(landmark)
             else:
                 total_landmarks.append(landmark)
-    return total_landmarks
+    return matched_landmarks
