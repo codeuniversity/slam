@@ -74,16 +74,16 @@ void loop() {
 
     moveClockwise = false;
 
-    for (int i=0; i<360; i+=5) {
+    for (int i=1; i<360; i+=1) {
       // The Arduino sketch "pauses" during move()
-      stepper.moveDegrees(moveClockwise, 5);
+      stepper.moveDegrees(moveClockwise, 1);
       Serial.print(i);
       Serial.print('-');
       Serial.print(sensor.readRangeContinuousMillimeters());
       if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
 
       Serial.println();
-      delay(100);
+      delay(10);
     }
     
 }
