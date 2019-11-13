@@ -5,8 +5,8 @@ class Point:
         self.rotation = rotation
         self.distance = distance
 
-        x = (distance * math.cos(math.radians(rotation)))
-        y = (distance * math.sin(math.radians(rotation)))
+        self.x = (distance * math.cos(math.radians(rotation)))
+        self.y = (distance * math.sin(math.radians(rotation)))
 
 
 class Landmark:
@@ -14,5 +14,7 @@ class Landmark:
         self.A = A
         self.B = B
         self.C = C
-        AB = [B.x - A.x, B.y - A.y]
-        BC = [C.x - B.x, C.y - B.y]
+
+        self.AB = [B.x - A.x, B.y - A.y]
+        self.BC = [C.x - B.x, C.y - B.y]
+
