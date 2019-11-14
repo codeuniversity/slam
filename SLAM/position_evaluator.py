@@ -18,7 +18,7 @@ def evaluate_position(landmark):
     ZCy = math.cos(alpha_C) * landmark.C.distance
     robot_C = Point(None, None, x=landmark.B.x+ZCx, y=landmark.C.y+ZCy)
 
-    robot_position = (robot_A+robot_B+robot_C)
+    robot_position = (robot_A+robot_B+robot_C)/3
     return robot_position
 
 
