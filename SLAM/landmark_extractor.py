@@ -1,7 +1,7 @@
 import SLAM.receiver
 import SLAM.core
 
-def extract_spike_landmark(points):
+def extract_spike_landmarks(points):
     #array that stores found landmarks:
     landmarks = []
 
