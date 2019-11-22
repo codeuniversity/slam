@@ -37,3 +37,9 @@ class Landmark:
         self.AB = [B.x - A.x, B.y - A.y]
         self.BC = [C.x - B.x, C.y - B.y]
 
+    def __eq__(self, other):
+        if self.AB==other.AB and self.BC == other.BC:
+            return True
+        else:
+            return False
+
