@@ -34,7 +34,7 @@ def main():
         send_position(robot_position)
 
 
-    return stored_landmarks,global_points
+    return stored_landmarks, new_global_landmarks, global_points
 
 
 
