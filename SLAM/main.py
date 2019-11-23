@@ -4,6 +4,8 @@ from SLAM.landmark_matcher import match_landmarks
 from SLAM.position_evaluator import evaluate_position
 from SLAM.receiver import Receiver
 from multiprocessing import Queue
+from SLAM.globalizer import *
+from SLAM.sender import *
 
 # creates point objects
 def create_points(point_batch):
@@ -18,16 +20,21 @@ def main():
     queue = Queue()
     receiver = Receiver(queue)
     receiver.start()
-    robot_trace = []
-    global_points = []
     for point_batch in queue.get():
-        points = create_points(point_batch)
-        landmarks = extract_spike_landmarks(points)
-        matched_landmarks = match_landmarks(landmarks)
-        robot_position = evaluate_position(matched_landmarks[0])
-        global_points.append(robot_trace.append(robot_position,points))
+        local_points = create_points(point_batch) #local points
+        found_landmarks = extract_spike_landmarks(local_points)   #local landmarks
+        matched_landmarks,new_landmarks = match_landmarks(found_landmarks, stored_landmarks)
+
+        robot_position = evaluate_position(matched_landmarks)
+        new_global_landmarks = globalize_landmarks(robot_position, new_landmarks)
+        global_points = globalize_points(local_points)
+
+        stored_landmarks.append(new_global_landmarks)
+        send_points(global_points)
+        send_position(robot_position)
 
 
+    return stored_landmarks,global_points
 
 
 
