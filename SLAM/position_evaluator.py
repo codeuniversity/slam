@@ -2,7 +2,8 @@ import SLAM.landmark_matcher
 from SLAM.core import Point
 import math
 
-def evaluate_position(landmark):
+def evaluate_position(landmarks):
+    landmark = landmarks[0]
     alpha_A = calculate_alpha(landmark.A.rotation)
     ZAx = math.sin(alpha_A)*landmark.A.distance
     ZAy = math.cos(alpha_A)*landmark.A.distance
