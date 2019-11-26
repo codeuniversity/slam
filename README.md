@@ -10,41 +10,31 @@ It then tries to match these newly found landmarks with previous observed ones t
 1. **Requirements**
 2. **Usage**
 3. **Project architecture**
-4. **References**
 
 ## 1. Requirements
 
 #### Software:
 - python3
 - [MHIST](https://github.com/alexmorten/mhist)
-- 
+- [nervo](https://github.com/codeuniversity/nervo)
 
 #### Hardware:
 
 - Arduino Uno,
 - Raspberry Pi,
 - 28BYJ-48 stepper motor using ULN2003 driver board
-- Lidar sensor
-
-#### Assumptions:
-
-Data that is received is in `[rotation,distance]` format
+- Lidar sensor (30mm range)
 
 ## 2. Usage
+
+nervo and MHIST should be running
 
 execute Mainfile
 
 ## 3. Project architecture
 
-#### High level structure
+![alt](SLAM_architecture.png)
 
-(includes microcontroller (and sensor), nervo on pi, MHIST and the SLAM programm)
+Data that is received is in `[rotation,distance]` format
 
-#### Low-level structure
-
-SLAM repo
-
-
-## 4. References
-reference to stepper-arduino and Lidar sensor set-up
 
