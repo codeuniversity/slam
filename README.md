@@ -1,8 +1,7 @@
 # SLAM
 
-SLAM allows our robot to locate itself and map it's environment simultaneously.
-This programm takes 360 degrees range data from a Lidar sensor and extracts distinct features, also known as landmarks
-(e.g wall corners) from it. 
+SLAM allows our robot to locate itself and map its environment simultaneously.
+This programm extracts distinct features, also known as landmarks (e.g wall corners), from the range measurement (360 degrees) of the Lidar sensor.
 It then tries to match these newly found landmarks with previous observed ones to estimate the robot's current position.
  
 
@@ -20,8 +19,8 @@ It then tries to match these newly found landmarks with previous observed ones t
 
 #### Hardware:
 
-- Arduino Uno,
-- Raspberry Pi,
+- Arduino Uno
+- Raspberry Pi
 - 28BYJ-48 stepper motor using ULN2003 driver board
 - Lidar sensor (30mm range)
 
@@ -35,6 +34,10 @@ execute Mainfile
 
 ![alt](SLAM_architecture.png)
 
+[elaborate on diagram]
+
 Data that is received is in `[rotation,distance]` format
+
+
 
 
