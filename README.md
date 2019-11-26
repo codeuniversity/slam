@@ -1,0 +1,50 @@
+# SLAM
+
+SLAM allows our robot to locate itself and map it's environment simultaneously.
+This programm takes 360 degrees range data from a Lidar sensor and extracts distinct features, also known as landmarks
+(e.g wall corners) from it. 
+It then tries to match these newly found landmarks with previous observed ones to estimate the robot's current position.
+ 
+
+
+1. **Requirements**
+2. **Usage**
+3. **Project architecture**
+4. **References**
+
+## 1. Requirements
+
+#### Software:
+- python3
+- [MHIST](https://github.com/alexmorten/mhist)
+- 
+
+#### Hardware:
+
+- Arduino Uno,
+- Raspberry Pi,
+- 28BYJ-48 stepper motor using ULN2003 driver board
+- Lidar sensor
+
+#### Assumptions:
+
+Data that is received is in `[rotation,distance]` format
+
+## 2. Usage
+
+execute Mainfile
+
+## 3. Project architecture
+
+#### High level structure
+
+(includes microcontroller (and sensor), nervo on pi, MHIST and the SLAM programm)
+
+#### Low-level structure
+
+SLAM repo
+
+
+## 4. References
+reference to stepper-arduino and Lidar sensor set-up
+
