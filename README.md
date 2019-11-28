@@ -23,8 +23,8 @@ The [low level controller](https://github.com/codeuniversity/slam/blob/master/mo
 
 ![alt](SLAM_diagram.png)
 
-The receiver continuously receives range data from MHIST and creates point batches of data from one full rotation. 
-Then the landmark extractor iterates through the point batch and extracts landmarks.
+The receiver runs on a separate process that continuously receives range data from MHIST and creates point batches of data from one full rotation. 
+Then the landmark extractor iterates through the point batch and extracts local landmarks. Local means relative to the robot's current position instead of to the origin (aka the robot's first position).
 Those extracted landmarks are then matched with landmarks from previous measurements in landmark matcher. 
 From these matched landmarks we can estimate the new robot position. Knowing the position we can globalize the new landmarks and then add these to stored landmarks. We then also globalize the points. 
 Lastly, we send both the position of the robot as well as the points to MHIST so that the [high-level-controller](https://github.com/codeuniversity/control-high) can retrieve the data and plan the robot's trajectory.
