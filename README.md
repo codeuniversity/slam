@@ -18,7 +18,7 @@ It then tries to match these newly found landmarks with previous observed ones t
 - python3
 - [MHIST](https://github.com/alexmorten/mhist)
 
-MHIST is a simple on disc measurement data base that stores and redistributes measurements consisting of a name, a value and optionally a timestamp through [grpc](https://github.com/grpc).
+MHIST is a simple on-disc measurement data base that stores and redistributes measurements consisting of a name, a value and optionally a timestamp through [grpc](https://github.com/grpc).
 
 ## 2. Usage 
 
