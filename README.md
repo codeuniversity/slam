@@ -1,26 +1,17 @@
 # SLAM
 
-SLAM allows our robot to locate itself and map its environment simultaneously.
-This programm extracts distinct features, also known as landmarks (e.g wall corners), from the range measurement (360 degrees) of the Lidar sensor.
-It then tries to match these newly found landmarks with previous observed ones to estimate the robot's current position.
- 
+SLAM allows our robot to locate itself and map its environment simultaneously by measuring the environtment and extracting landmarks th previous observed ones to estimate 
 
-### Table of Content
+1. [Requirements](https://github.com/codeuniversity/slam/blob/SLAM-technical-doc/README.md#1-requirements)
+2. [Usage](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#2-usage)
+3. [Project architecture](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#3-project-architecture)
 
-[1. **Requirements**](https://github.com/codeuniversity/slam/blob/SLAM-technical-doc/README.md#1-requirements)
-
-[2. **Usage**](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#2-usage)
-
-[3. **Project architecture**](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#3-project-architecture)
-
-## 1. Requirements
+### 1. Requirements
 
 - python3
-- [MHIST](https://github.com/alexmorten/mhist)
+- [MHIST](https://github.com/alexmorten/mhist)  (MHIST is a simple on-disc measurement data base that stores and redistributes measurements consisting of a name, a value and optionally a timestamp through [grpc](https://github.com/grpc).)
 
-MHIST is a simple on-disc measurement data base that stores and redistributes measurements consisting of a name, a value and optionally a timestamp through [grpc](https://github.com/grpc).
-
-## 2. Usage 
+### 2. Usage 
 
 Hardware used:
 - micro controller: Arduino Uno
@@ -28,27 +19,20 @@ Hardware used:
 - motor: 28BYJ-48 stepper motor (with ULN2003 driver board)
 - rangefinder: Lidar sensor VL6180 VL6180X (30cm range)
 
-The [low level controller](https://github.com/codeuniversity/slam/blob/master/motor_lidar/motor_lidar.ino) that runs on the Arduino continuously turns the motor by 360 degrees (it turns back to 0 degrees counterclockwise after each rotation). The sensor is fixed on the motor and measures the distance to objects in the environment. [Nervo](https://github.com/codeuniversity/nervo) receives the range measurements and rotation data and puts them into MHIST from which SLAM can then retrieve the data.
+1. run [nervo](https://github.com/codeuniversity/nervo) and [MHIST](https://github.com/alexmorten/mhist) on raspberry pi
+2. run [low level_controller](https://github.com/codeuniversity/slam/blob/master/motor_lidar/motor_lidar.ino) on Arduino
+3. run SLAM with `make run` on raspberry pi
 
-1. run [nervo](https://github.com/codeuniversity/nervo) and [MHIST](https://github.com/alexmorten/mhist)
+The [low level controller](https://github.com/codeuniversity/slam/blob/master/motor_lidar/motor_lidar.ino) continuously turns the motor by 360 degrees. The sensor is fixed on the motor and measures the distance to objects in the environment. [Nervo](https://github.com/codeuniversity/nervo) receives the measurements and rotation data and puts them into MHIST.
 
-2. run the [low level_controller](https://github.com/codeuniversity/slam/blob/master/motor_lidar/motor_lidar.ino)
+### 3. Project architecture
 
-3. run SLAM with `make run`
-
-
-## 3. Project architecture
-
-![alt](SLAM_diagram%20(3).png)
+![alt](SLAM_diagram.png)
 
 The receiver continuously receives range data from MHIST and creates point batches of data from one full turn. 
-
-Then landmark extractor iterates through the point batch and compares the distance from the robot to adjacent points. If the difference of the ranges exceeds a defined threshold (depends on the range of the used sensor) a landmark of this area (described by 3 adjacent points) is created. 
-
-Those extracted landmarks are then matched with already observed landmarks from previous measurements in landmark matcher. 
-
-From matched landmarks we can estimate the new robot position. Knowing the position we can globalize the newly found landmarks and then add these to stored landmarks. We then also globalize the points. 
-
-Lastly, we send both the position of the robot as well as the points to MHIST so that the [high-level-controller](https://github.com/codeuniversity/control-high) can retrieve the data and further plan the robot's trajectory.
+Then the landmark extractor iterates through the point batch and extracts landmarks.
+Those extracted landmarks are then matched with landmarks from previous measurements in landmark matcher. 
+From the matched landmarks we can estimate the new robot position. Knowing the position we can globalize the new landmarks and then add these to stored landmarks. We then also globalize the points. 
+Lastly, we send both the position of the robot as well as the points to MHIST so that the [high-level-controller](https://github.com/codeuniversity/control-high) can retrieve the data and plan the robot's trajectory.
 
 
