@@ -36,7 +36,7 @@ The [low level controller](https://github.com/codeuniversity/slam/blob/master/mo
 
 ## 3. Project architecture
 
-![alt](SLAM_diagram(3).png)
+![alt](SLAM_diagram%20(3).png)
 
 The receiver continuously receives range data from MHIST and creates point batches of data from one full turn. 
 
