@@ -5,10 +5,13 @@ This programm extracts distinct features, also known as landmarks (e.g wall corn
 It then tries to match these newly found landmarks with previous observed ones to estimate the robot's current position.
  
 
+### Table of Content
 
-1. **Requirements**
-2. **Usage**
-3. **Project architecture**
+[1. **Requirements**](https://github.com/codeuniversity/slam/blob/SLAM-technical-doc/README.md#1-requirements)
+
+[2. **Usage**](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#2-usage)
+
+[3. **Project architecture**](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#3-project-architecture)
 
 ## 1. Requirements
 
