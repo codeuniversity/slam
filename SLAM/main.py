@@ -16,25 +16,28 @@ def create_points(point_batch):
 
 
 def main():
+    first_iteration=True
     stored_landmarks = []
     queue = Queue()
     receiver = Receiver(queue)
     receiver.start()
+    new_landmarks=[]
+    point_cloud=[]
     for point_batch in queue.get():
-        local_points = create_points(point_batch) #local points
-        found_landmarks = extract_spike_landmarks(local_points)   #local landmarks
+        point_cloud = create_points(point_batch) #local points
+        found_landmarks = extract_spike_landmarks(point_cloud)   #local landmarks
         matched_landmarks,new_landmarks = match_landmarks(found_landmarks, stored_landmarks)
 
-        robot_position = evaluate_position(matched_landmarks)
-        new_global_landmarks = globalize_landmarks(robot_position, new_landmarks)
-        global_points = globalize_points(local_points)
+        if first_iteration:
+            robot_position= Point(None,None,x=0,y=0)
+        else:
+            robot_position = evaluate_position(matched_landmarks)
+            new_landmarks = globalize_landmarks(robot_position, new_landmarks)
+            point_cloud = globalize_points(robot_position,point_cloud)
 
-        stored_landmarks.append(new_global_landmarks)
-        send_points(global_points)
+        stored_landmarks.append(new_landmarks)
+        send_points(point_cloud)
         send_position(robot_position)
 
 
-    return stored_landmarks, new_global_landmarks, global_points
-
-
-
+    return stored_landmarks, new_landmarks, point_cloud
