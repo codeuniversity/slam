@@ -15,11 +15,13 @@ class Receiver(Process):
         channel = grpc.insecure_channel('localhost:6666')
         stub = MhistStub(channel)
 
-        old_rotation = 0
+        old_rotation = 0.0
         point_batch = []
 
         for message in stub.Subscribe(Filter(names=['sensor_data'])):
             rotation,distance = message.measurement.raw.value.decode().split('-')
+            rotation=float(rotation)
+            distance=float(distance)
             if rotation < old_rotation:
                 self.queue.put(point_batch)
                 point_batch = []
