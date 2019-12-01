@@ -29,7 +29,7 @@ class Point:
 
 
 class Landmark:
-    def __init__(self,A,B,C):
+    def __init__(self,A:Point,B:Point,C:Point):
         self.A = A
         self.B = B
         self.C = C
@@ -43,3 +43,10 @@ class Landmark:
         else:
             return False
 
+    def transfer_coordinates(self,landmark):
+        self.A.x = landmark.A.x
+        self.A.y = landmark.A.y
+        self.B.x = landmark.B.x
+        self.B.y = landmark.B.y
+        self.C.x = landmark.C.x
+        self.C.y = landmark.C.y
