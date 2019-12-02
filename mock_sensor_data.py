@@ -14,5 +14,8 @@ while True:
     s = np.random.normal(mu, sigma, 1000)
     s = s[s>0]
     for r in range(360):
-        stub.Store(MeasurementMessage(name="sensor_data", measurement=Measurement(Raw(value="{0}-{1}".format(r, s[r])))))
+        stub.Store(MeasurementMessage(
+            name="sensor_data",
+            measurement=Measurement(
+                raw=Raw(value="{0}-{1}".format(r, s[r]).encode()))))
         time.sleep(0.05)
