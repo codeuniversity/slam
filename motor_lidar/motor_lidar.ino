@@ -37,7 +37,7 @@ CheapStepper stepper (8,9,10,11);
 
 // let's create a boolean variable to save the direction of our rotation
 
-boolean moveClockwise = true;
+boolean moveClockwise = false;
 
 
 void setup() {
@@ -57,6 +57,7 @@ void setup() {
   
   Serial.begin(9600); 
   Wire.begin();
+  Serial.println("ANNOUNCE lidar");
   
   sensor.init();
   sensor.setTimeout(500);
@@ -67,23 +68,24 @@ void setup() {
 void loop() {
 
     // let's do a clockwise move first
-  
-    moveClockwise = true;
-    stepper.moveToDegree(moveClockwise, 0);
-    delay(100);
-
     moveClockwise = false;
+    float gear_conversion = 53/15;
 
-    for (int i=1; i<360; i+=1) {
+    for (float i=1; i<360*gear_conversion; i+=1) {
       // The Arduino sketch "pauses" during move()
       stepper.moveDegrees(moveClockwise, 1);
-      Serial.print(i);
+      Serial.print("sensor_data ");
+      Serial.print(i/gear_conversion);
       Serial.print('-');
       Serial.print(sensor.readRangeContinuousMillimeters());
-      if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
-
+    
       Serial.println();
       delay(10);
+    }
+    moveClockwise = true;
+    for (float i=1; i< 360*gear_conversion; i++){
+      stepper.moveDegrees(moveClockwise, 1);
+      delay(1);
     }
     
 }
