@@ -60,30 +60,34 @@ void setup() {
   
   sensor.init();
   sensor.setTimeout(500);
-  sensor.startContinuous();       
+  sensor.startContinuous();  
+  Serial.println("ANNOUNCE Lidar");     
   
 }
 
 void loop() {
 
-    // let's do a clockwise move first
-  
-    moveClockwise = true;
-    stepper.moveToDegree(moveClockwise, 0);
-    delay(100);
+    int conversion_ratio=53/15;
 
     moveClockwise = false;
 
-    for (int i=1; i<360; i+=1) {
-      // The Arduino sketch "pauses" during move()
+    for (int i=1; i<360*conversion_ratio; i+=1) {
+     
       stepper.moveDegrees(moveClockwise, 1);
-      Serial.print(i);
+      Serial.print("sensor_data ");
+      Serial.print(i/conversion_ratio);
       Serial.print('-');
-      Serial.print(sensor.readRangeContinuousMillimeters());
-      if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
+      Serial.println(sensor.readRangeContinuousMillimeters());
 
-      Serial.println();
       delay(10);
     }
+
+    moveClockwise = true;
+
+    for (int i=1; i<360*conversion_ratio; i+=1){
+      stepper.moveDegrees(moveClockwise, 1);
+      delay(1);
+    }
+    
     
 }
