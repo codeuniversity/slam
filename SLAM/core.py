@@ -61,7 +61,7 @@ class Landmark:
         self.C.x = other_landmark.C.x
         self.C.y = other_landmark.C.y
 
-    def get_avg_robot_poistion(self):
+    def get_avg_robot_position(self):
         alpha_A = calculate_alpha(self.A.rotation)
         ZAx = math.sin(alpha_A)*self.A.distance
         ZAy = math.cos(alpha_A)*self.A.distance
