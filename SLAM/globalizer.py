@@ -3,8 +3,8 @@
 def globalize_points(robot_position,local_coordinates):
     global_coordinates = []
     for local_coordinate in local_coordinates:
-        local_coordinate = local_coordinate+robot_position
-        global_coordinates.append(local_coordinate)
+        global_coordinate = local_coordinate+robot_position
+        global_coordinates.append(global_coordinate)
     return global_coordinates
 
 def globalize_landmarks(robot_position,local_landmarks):
