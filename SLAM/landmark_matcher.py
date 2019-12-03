@@ -7,7 +7,7 @@ def match_landmarks(landmarks_found, stored_landmarks):
         new_landmarks=landmarks_found
     else:
         for landmark in landmarks_found:
-            for i in range(stored_landmarks):
+            for i in range(len(stored_landmarks)):
                 if landmark==stored_landmarks[i]:
                     landmark.transfer_coordinates(stored_landmarks[i])
                     matched_landmarks.append(landmark)
