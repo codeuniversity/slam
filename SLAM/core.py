@@ -37,16 +37,16 @@ class Landmark:
         self.AB = [B.x - A.x, B.y - A.y]
         self.BC = [C.x - B.x, C.y - B.y]
 
-    def __eq__(self, other):
-        if self.AB==other.AB and self.BC == other.BC:
+    def __eq__(self, other_landmark):
+        if self.AB==other_landmark.AB and self.BC == other_landmark.BC:
             return True
         else:
             return False
 
-    def transfer_coordinates(self,landmark):
-        self.A.x = landmark.A.x
-        self.A.y = landmark.A.y
-        self.B.x = landmark.B.x
-        self.B.y = landmark.B.y
-        self.C.x = landmark.C.x
-        self.C.y = landmark.C.y
+    def transfer_coordinates(self,other_landmark):
+        self.A.x = other_landmark.A.x
+        self.A.y = other_landmark.A.y
+        self.B.x = other_landmark.B.x
+        self.B.y = other_landmark.B.y
+        self.C.x = other_landmark.C.x
+        self.C.y = other_landmark.C.y
