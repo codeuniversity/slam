@@ -2,9 +2,15 @@ def match_landmarks(landmarks_found, stored_landmarks):
     #compare vectors
     matched_landmarks = []
     new_landmarks = []
-    for landmark in landmarks_found:
-        if landmark in stored_landmarks:
-            matched_landmarks.append(landmark)
-        else:
-            new_landmarks.append(landmark)
+    if len(stored_landmarks)==0:
+        new_landmarks=landmarks_found
+    else:
+        for landmark in landmarks_found:
+            for i in range(len(stored_landmarks)):
+                if landmark==stored_landmarks[i]:
+                    landmark.transfer_coordinates(stored_landmarks[i])
+                    matched_landmarks.append(landmark)
+                else:
+                    new_landmarks.append(landmark)
+
     return matched_landmarks, new_landmarks
