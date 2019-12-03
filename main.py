@@ -1,11 +1,11 @@
-import SLAM.core
+from SLAM.core import Point, Landmark
 from SLAM.landmark_extractor import extract_spike_landmarks
 from SLAM.landmark_matcher import match_landmarks
 from SLAM.position_evaluator import evaluate_position
 from SLAM.receiver import Receiver
 from multiprocessing import Queue
-from SLAM.globalizer import *
-from SLAM.sender import *
+from SLAM.globalizer import globalize_points, globalize_landmarks
+from SLAM.sender import send_points, send_position
 
 # creates point objects
 def create_points(point_batch):
@@ -29,7 +29,8 @@ def main():
         matched_landmarks,new_landmarks = match_landmarks(found_landmarks, stored_landmarks)
 
         if first_iteration:
-            robot_position= Point(None,None,x=0,y=0)
+            robot_position= Point(None, None, x=0, y=0)
+            first_iteration=False
         else:
             robot_position = evaluate_position(matched_landmarks)
             new_landmarks = globalize_landmarks(robot_position, new_landmarks)
