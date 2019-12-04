@@ -27,6 +27,11 @@ class Point:
         new_y = self.y + other.y
         return Point(None, None, x=new_x, y=new_y)
 
+    def __sub__(self, other):
+        new_x = self.x - other.x
+        new_y = self.y + other.y
+        return Point(None, None, x = new_x, y = new_y)
+
     def __truediv__(self, other):
         new_x = self.x/other
         new_y = self.y/other
@@ -60,6 +65,13 @@ class Landmark:
         self.B.y = other_landmark.B.y
         self.C.x = other_landmark.C.x
         self.C.y = other_landmark.C.y
+
+    def calculate_rp_vector(self, point):
+        alpha = calculate_alpha(point.rotation)
+        x = math.sin(alpha) * point.distance
+        y = math.cos(alpha) * point.distance
+        rp_vector = Point(None, None, x, y)
+        return rp_vector
 
     def get_avg_robot_position(self):
         alpha_A = calculate_alpha(self.A.rotation)
