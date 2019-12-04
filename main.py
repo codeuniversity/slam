@@ -6,6 +6,7 @@ from SLAM.receiver import Receiver
 from multiprocessing import Queue
 from SLAM.globalizer import globalize_points, globalize_landmarks
 from SLAM.sender import send_points, send_position
+from SLAM.landmark_updater import update_matched_landmarks
 
 # creates point objects
 def create_points(point_batch):
@@ -34,6 +35,7 @@ def main():
             first_iteration = False
         elif len(matched_landmarks) > 0:
             robot_position = evaluate_avg_position(matched_landmarks)
+            update_matched_landmarks(matched_landmarks, stored_landmarks, robot_position)
             new_landmarks = globalize_landmarks(robot_position, new_landmarks)
             point_cloud = globalize_points(robot_position, point_cloud)
         else:
