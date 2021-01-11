@@ -66,12 +66,14 @@ class Landmark:
         self.C.x = other_landmark.C.x
         self.C.y = other_landmark.C.y
 
+
     def calculate_rp_vector(self, point):
         alpha = calculate_alpha(point.rotation)
         x = math.sin(alpha) * point.distance
         y = math.cos(alpha) * point.distance
         rp_vector = Point(None, None, x, y)
         return rp_vector
+
 
     def get_avg_robot_position(self):
         alpha_A = calculate_alpha(self.A.rotation)
