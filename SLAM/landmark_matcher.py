@@ -2,6 +2,7 @@ def match_landmarks(landmarks_found, stored_landmarks):
     #compare vectors
     matched_landmarks = []
     new_landmarks = []
+
     if len(stored_landmarks)==0:
         new_landmarks=landmarks_found
     else:
