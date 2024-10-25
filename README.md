@@ -2,7 +2,7 @@
 
 SLAM allows our robot to locate itself and map its environment simultaneously by measuring the environtment and performing landmark extracting and matching.
 
-1. [Requirements](https://github.com/codeuniversity/slam/blob/SLAM-technical-doc/README.md#1-requirements)
+1. [Requirements](#1-requirements)
 2. [Usage](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#2-usage)
 3. [Project architecture](https://github.com/codeuniversity/slam/tree/SLAM-technical-doc#3-project-architecture)
 
